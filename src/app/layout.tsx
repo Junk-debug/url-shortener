@@ -1,8 +1,10 @@
-import type React from "react"
-// import {  } from "./components/ui/toaster"
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/toaster";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
@@ -10,6 +12,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Toaster />
       </body>
     </html>
-  )
+  );
 }
-
