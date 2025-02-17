@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,8 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toaster, toast } from "sonner";
 
-
-const URLShortener = () => {
+export default function URLShortener() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [error, setError] = useState("");
@@ -41,13 +38,30 @@ const URLShortener = () => {
 
     try {
       new URL(url);
-      // Simulate API call with a delay
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setShortUrl(
-        `https://short.url/${Math.random().toString(36).substr(2, 6)}`
-      );
-    } catch {
-      setError("Please enter a valid URL");
+
+      const response = await fetch("https://io.up.railway.app/links/shorten", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to shorten the URL");
+      }
+
+      const data = await response.json();
+      console.log("API Response:", data);
+
+      if (data?.data?.shortLink) {
+        setShortUrl(data.data.shortLink);
+      } else {
+        setError("Failed to shorten the URL, please try again.");
+      }
+    } catch (error) {
+      setError("Failed to shorten the URL or invalid URL");
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +73,7 @@ const URLShortener = () => {
       toast("Copied! The shortened URL has been copied to your clipboard.");
     } catch (err) {
       console.error("Failed to copy: ", err);
-      toast.error("Failed to copy the URL. Please try again.");
+      toast("Error copying URL");
     }
   };
 
@@ -273,6 +287,3 @@ const URLShortener = () => {
     </div>
   );
 }
-
-export default URLShortener;  
-
