@@ -20,7 +20,7 @@ export default function UrlShortener() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 bg-gradient-to-br from-purple-100 to-indigo-200 dark:bg-background dark:bg-none`}
+      className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 bg-linear-to-br from-purple-100 to-indigo-200 dark:bg-background dark:bg-none`}
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}

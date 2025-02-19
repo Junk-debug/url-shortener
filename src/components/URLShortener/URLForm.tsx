@@ -72,7 +72,7 @@ export default function UrlForm({
             <Label htmlFor="url" className={`block`}>
               Enter your URL
             </Label>
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="mt-1 relative rounded-md shadow-xs">
               <Input
                 id="url"
                 name="url"
@@ -95,7 +95,7 @@ export default function UrlForm({
 
           <Button
             type="submit"
-            className="w-full flex justify-center shadow-sm"
+            className="w-full flex justify-center shadow-xs"
             disabled={isLoading}
           >
             {isLoading ? "Processing..." : "Shorten URL"}

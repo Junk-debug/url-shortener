@@ -26,9 +26,9 @@ export default function ShortUrlDisplay({
         <Input
           value={shortUrl}
           readOnly
-          className={`flex-grow bg-background dark:bg-input`}
+          className={`grow bg-background dark:bg-input`}
         />
-        <Button onClick={copyToClipboard} className="flex-shrink-0">
+        <Button onClick={copyToClipboard} className="shrink-0">
           <Copy className="h-4 w-4" />
         </Button>
       </div>
