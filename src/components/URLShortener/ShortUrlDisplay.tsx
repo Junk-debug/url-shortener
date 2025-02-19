@@ -24,7 +24,7 @@ export default function ShortUrlDisplay({ shortUrl, copyToClipboard, isDarkMode 
         <Input
           value={shortUrl}
           readOnly
-          className={`flex-grow ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"}`}
+          className={`flex-grow ${isDarkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-900 border-gray-300"}`}
         />
         <Button onClick={copyToClipboard} className="flex-shrink-0 bg-purple-500 hover:bg-purple-600">
           <Copy className="h-4 w-4" />

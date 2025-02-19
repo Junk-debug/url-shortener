@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle, LinkIcon } from "lucide-react"
 
-interface URLFormProps {
+interface UrlFormProps {
   url: string
   setUrl: (url: string) => void
   handleSubmit: (e: React.FormEvent) => Promise<void>
@@ -18,7 +18,7 @@ interface URLFormProps {
   isDarkMode: boolean
 }
 
-export default function URLForm({ url, setUrl, handleSubmit, isLoading, error, isDarkMode }: URLFormProps) {
+export default function UrlForm({ url, setUrl, handleSubmit, isLoading, error, isDarkMode }: UrlFormProps) {
   return (
     <>
       <div className="text-center">
