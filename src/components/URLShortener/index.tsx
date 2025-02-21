@@ -5,7 +5,6 @@ import UrlForm from "./URLForm";
 import ShortURLDisplay from "./ShortUrlDisplay";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useUrlShortener } from "@/hooks/useUrlShortener";
-import { useTheme } from "next-themes";
 
 export default function UrlShortener() {
   const {
