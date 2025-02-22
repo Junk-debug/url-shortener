@@ -1,21 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import UrlForm from "./URLForm";
-import ShortURLDisplay from "./ShortUrlDisplay";
+import URLForm from "./URLForm";
+import ShortUrlDisplay from "./ShortUrlDisplay";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useUrlShortener } from "@/hooks/useUrlShortener";
+import { useState } from "react";
 
 export default function UrlShortener() {
-  const {
-    url,
-    setUrl,
-    shortUrl,
-    error,
-    isLoading,
-    handleSubmit,
-    copyToClipboard,
-  } = useUrlShortener();
+  const [url, setUrl] = useState<string>("");
+
+  const { shortUrl, error, isLoading, handleSubmit, copyToClipboard } =
+    useUrlShortener();
+
+  const onSubmit = async (url: string) => {
+    await handleSubmit(url);
+  };
 
   return (
     <div
@@ -27,15 +27,15 @@ export default function UrlShortener() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md space-y-8"
       >
-        <UrlForm
-          url={url}
-          setUrl={setUrl}
-          handleSubmit={handleSubmit}
+        <URLForm
+          handleSubmit={onSubmit}
           isLoading={isLoading}
           error={error}
+          url={url}
+          setUrl={setUrl}
         />
         {shortUrl && (
-          <ShortURLDisplay
+          <ShortUrlDisplay
             shortUrl={shortUrl}
             copyToClipboard={copyToClipboard}
           />
