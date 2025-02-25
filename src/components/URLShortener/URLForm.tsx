@@ -13,8 +13,6 @@ interface UrlFormProps {
   handleSubmit: (url: string) => Promise<void>;
   isLoading: boolean;
   error: string | null;
-  url: string;
-  setUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function URLForm({

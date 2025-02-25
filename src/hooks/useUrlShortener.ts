@@ -1,20 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
-import { copyToClipboard } from "@/lib/copyToClipboard";
+import { useState } from "react";
 
 export function useUrlShortener() {
-  const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
 
   const handleSubmit = async (url: string) => {
-    // event.preventDefault();
     setError(null);
     setShortUrl(null);
     setIsLoading(true);
@@ -56,39 +49,10 @@ export function useUrlShortener() {
     }
   };
 
-  const handleCopy = async () => {
-    if (shortUrl) {
-      const success = await copyToClipboard(shortUrl);
-      if (success) {
-        toast.success(
-          "Copied! The shortened URL has been copied to your clipboard."
-        );
-      } else {
-        toast.error("Failed to copy URL.");
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (copyStatus === "success") {
-      console.log("success");
-      toast.success(
-        "Copied! The shortened URL has been copied to your clipboard."
-      );
-      setCopyStatus("idle");
-    } else if (copyStatus === "error") {
-      toast.success("Error copying URL");
-      setCopyStatus("idle");
-    }
-  }, [copyStatus]);
-
   return {
-    url,
-    setUrl,
     shortUrl,
     error,
     isLoading,
     handleSubmit,
-    copyToClipboard: handleCopy,
   };
 }

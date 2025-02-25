@@ -4,15 +4,14 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Copy } from "lucide-react";
+import { copyToClipboard } from "@/lib/copyToClipboard";
 
 interface ShortUrlDisplayProps {
   shortUrl: string;
-  copyToClipboard: () => Promise<void>;
 }
 
 export default function ShortUrlDisplay({
   shortUrl,
-  copyToClipboard,
 }: ShortUrlDisplayProps) {
   return (
     <motion.div
@@ -28,7 +27,7 @@ export default function ShortUrlDisplay({
           readOnly
           className={`grow bg-background dark:bg-input`}
         />
-        <Button onClick={copyToClipboard} className="shrink-0">
+        <Button onClick={() => copyToClipboard(shortUrl)} className="shrink-0">
           <Copy className="h-4 w-4" />
         </Button>
       </div>

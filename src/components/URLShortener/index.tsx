@@ -5,21 +5,13 @@ import URLForm from "./URLForm";
 import ShortUrlDisplay from "./ShortUrlDisplay";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useUrlShortener } from "@/hooks/useUrlShortener";
-import { useState } from "react";
 
 export default function UrlShortener() {
-  const [url, setUrl] = useState<string>("");
-
-  const { shortUrl, error, isLoading, handleSubmit, copyToClipboard } =
-    useUrlShortener();
-
-  const onSubmit = async (url: string) => {
-    await handleSubmit(url);
-  };
+  const { shortUrl, error, isLoading, handleSubmit } = useUrlShortener();
 
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 bg-linear-to-br from-purple-100 to-indigo-200 dark:bg-background dark:bg-none`}
+      className="min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 bg-gradient-to-br from-purple-100 to-indigo-200 dark:bg-background"
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
@@ -27,18 +19,9 @@ export default function UrlShortener() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md space-y-8"
       >
-        <URLForm
-          handleSubmit={onSubmit}
-          isLoading={isLoading}
-          error={error}
-          url={url}
-          setUrl={setUrl}
-        />
+        <URLForm handleSubmit={handleSubmit} isLoading={isLoading} error={error} />
         {shortUrl && (
-          <ShortUrlDisplay
-            shortUrl={shortUrl}
-            copyToClipboard={copyToClipboard}
-          />
+          <ShortUrlDisplay shortUrl={shortUrl} />
         )}
       </motion.div>
       <motion.div
