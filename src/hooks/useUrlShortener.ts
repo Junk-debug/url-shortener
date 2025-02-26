@@ -1,19 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
 export function useUrlShortener() {
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const urlCache = useRef<Map<string, string>>(new Map());
 
-  const handleSubmit = async (url: string) => {
+  const handleSubmit = useCallback(async (url: string) => {
     setError(null);
     setShortUrl(null);
     setIsLoading(true);
 
     if (!url) {
       setError("Please enter a URL");
+      setIsLoading(false);
+      return;
+    }
+
+    if (urlCache.current.has(url)) {
+      setShortUrl(urlCache.current.get(url) || null);
       setIsLoading(false);
       return;
     }
@@ -37,6 +44,7 @@ export function useUrlShortener() {
       console.log("API Response:", data);
 
       if (data?.data?.shortLink) {
+        urlCache.current.set(url, data.data.shortLink);
         setShortUrl(data.data.shortLink);
       } else {
         setError("Failed to shorten the URL, please try again.");
@@ -47,7 +55,7 @@ export function useUrlShortener() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   return {
     shortUrl,
