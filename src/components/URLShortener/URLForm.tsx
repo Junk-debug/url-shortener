@@ -7,13 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LinkIcon } from "lucide-react";
 import { useState } from "react";
-import Headline from "@/components/ui/headline";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 
 interface UrlFormProps {
   handleSubmit: (url: string) => Promise<void>;
   isLoading: boolean;
-  error: string;
+  error: string | null;
 }
 
 export default function URLForm({
@@ -30,7 +29,6 @@ export default function URLForm({
 
   return (
     <>
-      <Headline isLoading={isLoading} />
       <motion.div
         className={"bg-card shadow-lg rounded-lg p-6 shadow-primary/50"}
         whileHover={{ scale: 1.02 }}
@@ -70,7 +68,8 @@ export default function URLForm({
             {isLoading ? "Processing..." : "Shorten URL"}
           </Button>
         </form>
-        <ErrorMessage error={error} />
+        {error && <ErrorMessage error={error} />}
+
       </motion.div>
     </>
   );
