@@ -1,13 +1,14 @@
 "use client";
 
 import type React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, LinkIcon } from "lucide-react";
 import { useState } from "react";
+import Headline from "@/components/ui/headline";
 
 interface UrlFormProps {
   handleSubmit: (url: string) => Promise<void>;
@@ -29,41 +30,7 @@ export default function URLForm({
 
   return (
     <>
-      <div className="text-center">
-        <AnimatePresence mode="wait">
-          {isLoading ? (
-            <motion.div
-              key="loading"
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 1,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "linear",
-              }}
-              className="inline-block mb-2"
-            >
-              <LinkIcon className={"h-12 w-12 text-primary"} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="static"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="inline-block mb-2"
-            >
-              <LinkIcon className={"h-12 w-12 text-primary"} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <h1 className={"text-4xl font-bold text-secondary-foreground"}>
-          URL Shortener
-        </h1>
-        <p className={"mt-2 text-muted-foreground"}>
-          Shorten your long URLs with style
-        </p>
-      </div>
-
+      <Headline isLoading={isLoading} />
       <motion.div
         className={"bg-card shadow-lg rounded-lg p-6 shadow-primary/50"}
         whileHover={{ scale: 1.02 }}
