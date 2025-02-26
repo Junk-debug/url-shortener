@@ -13,7 +13,7 @@ import ErrorMessage from "@/components/ui/ErrorMessage";
 interface UrlFormProps {
   handleSubmit: (url: string) => Promise<void>;
   isLoading: boolean;
-  error: string | null;
+  error: string;
 }
 
 export default function URLForm({
