@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, LinkIcon } from "lucide-react";
+import { LinkIcon } from "lucide-react";
 import { useState } from "react";
 import Headline from "@/components/ui/headline";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 interface UrlFormProps {
   handleSubmit: (url: string) => Promise<void>;
@@ -70,14 +70,7 @@ export default function URLForm({
             {isLoading ? "Processing..." : "Shorten URL"}
           </Button>
         </form>
-
-        {error && (
-          <Alert variant="destructive" className="mt-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
+        <ErrorMessage error={error} />
       </motion.div>
     </>
   );

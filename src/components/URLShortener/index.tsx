@@ -24,6 +24,7 @@ export default function UrlShortener() {
           <ShortUrlDisplay shortUrl={shortUrl} />
         )}
       </motion.div>
+      
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
