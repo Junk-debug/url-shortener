@@ -30,7 +30,7 @@ function isShortenError(obj: unknown): obj is ShortenError {
 }
 
 const shortenUrlFetcher = async (url: string) => {
-  const response = await fetch("https://io.up.railway.app/links/shorten", {
+  const response = await fetch("https://io.up.railway.app/links", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
