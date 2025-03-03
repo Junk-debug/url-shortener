@@ -8,7 +8,7 @@ import { useUrlShortener } from "@/hooks/useUrlShortener";
 import Headline from "@/components/ui/headline";
 
 export default function UrlShortener() {
-  const { shortUrl, error, isLoading, handleSubmit } = useUrlShortener();
+  const { data, error, isLoading, fetchData } = useUrlShortener();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300 bg-linear-to-br from-purple-100 to-indigo-200 dark:bg-background dark:bg-none">
@@ -19,12 +19,8 @@ export default function UrlShortener() {
         className="w-full max-w-md space-y-8"
       >
         <Headline isLoading={isLoading} />
-        <URLForm
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-          error={error}
-        />
-        {shortUrl && <ShortUrlDisplay shortUrl={shortUrl} />}
+        <URLForm handleSubmit={fetchData} isLoading={isLoading} error={error} />
+        {data && <ShortUrlDisplay shortUrl={data.shortLink} />}
       </motion.div>
 
       <motion.div

@@ -43,7 +43,7 @@ export default function URLForm({
               <Input
                 id="url"
                 name="url"
-                type="text"
+                type="url"
                 required
                 className={"block w-full pr-10"}
                 placeholder="https://example.com/very-long-url"
@@ -68,8 +68,8 @@ export default function URLForm({
             {isLoading ? "Processing..." : "Shorten URL"}
           </Button>
         </form>
-        {error && <ErrorMessage error={error} />}
 
+        {error && <ErrorMessage error={error} />}
       </motion.div>
     </>
   );

@@ -15,29 +15,28 @@ export function useFetch<R, T extends unknown[]>(
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = useCallback(
-  async (...params: T) => {
-    setIsLoading(true);
-    setError(null);  
-    setData(null);
-
-    try {
-      const response = await fetcherFn(...params);
-      setData(response);
+    async (...params: T) => {
+      setIsLoading(true);
       setError(null);
-      if (onSuccess) onSuccess(response);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-        if (onError) onError(err);
-      }
-    } finally {
-      setIsLoading(false);
-      if (onSettled) onSettled();
-    }
-  },
-  [fetcherFn, onError, onSettled, onSuccess]
-);
+      setData(null);
 
+      try {
+        const response = await fetcherFn(...params);
+        setData(response);
+        setError(null);
+        if (onSuccess) onSuccess(response);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+          if (onError) onError(err);
+        }
+      } finally {
+        setIsLoading(false);
+        if (onSettled) onSettled();
+      }
+    },
+    [fetcherFn, onError, onSettled, onSuccess]
+  );
 
   return { data, isLoading, error, fetchData };
 }
