@@ -3,7 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
 interface ErrorMessageProps {
-  error: string | null;
+  error: string;
 }
 
 export default function ErrorMessage({ error }: ErrorMessageProps) {
